@@ -32,7 +32,36 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  my_new_project:
+  fmk_dbt:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+
+    staging:
+      heap:
+        stg_heap_users:
+          materialized: ephemeral
+        stg_heap_sessions:
+          materialized: ephemeral
+        stg_heap_pageviews:
+          materialized: ephemeral
+        stg_heap_events:
+          materialized: ephemeral
+    transformed:
+      heap:
+        heap_users_dim:
+          materialized: incremental
+        heap_sessions_fct:
+          materialized: incremental
+        heap_pageviews_fct:
+          materialized: incremental
+        heap_events_fct:
+          materialized: incremental
+    fmk_core:
+      fmk_users_dim:
+        materialized: incremental
+      fmk_conversions:
+        materialized: incremental
+    explores:
+      hourly_signup_flow_l7:
+        materialized: table
+      daily_signup_flow_l30:
+        materialized: table
