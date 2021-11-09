@@ -28,39 +28,33 @@ clean-targets:         # directories to be removed by `dbt clean`
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
+vars:
+  'heap:timezone': 'America/Denver'
+  'heap:topline_funnel': ['marketing_site_landing_page_viewed_home','user_created','game_events_game_viewed_start','game_events_game_clicked_play','game_events_game_submitted_round','game_completed']
+  'heap:influence_events': ['marketing_site_docs_viewed_docs']
+  'heap:signup_event': 'user_created'
+  'heap:conversion_event': 'game_completed'
+
 # In this example config, we tell dbt to build all models in the example/ directory
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
   fmk_dbt_project:
     # Config indicated by + and applies to all files under models/example/
+    sources:
+      materialized: ephemeral
     staging:
       heap:
-        stg_heap_users:
-          materialized: ephemeral
-        stg_heap_sessions:
-          materialized: ephemeral
-        stg_heap_pageviews:
-          materialized: ephemeral
-        stg_heap_events:
-          materialized: ephemeral
-    transformed:
-      heap:
-        heap_users_dim:
-          materialized: incremental
-        heap_sessions_fct:
-          materialized: incremental
-        heap_pageviews_fct:
-          materialized: incremental
+        +materialized: incremental
         heap_events_fct:
-          materialized: incremental
+          enabled: true
+        heap_pageviews_fct:
+          enabled: false
+        heap_sessions_fct:
+          enabled: true
+        heap_users_dim:
+          enabled: false
     fmk_core:
-      fmk_users_dim:
-        materialized: incremental
-      fmk_conversions:
-        materialized: incremental
+      enabled: false
     explores:
-      hourly_signup_flow_l7:
-        materialized: table
-      daily_signup_flow_l30:
-        materialized: table
+      enabled: false

@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+
+  - name: heap
+    database: HEAP_MAIN_PRODUCTION
+    schema: HEAP
+    tables:
+      - name: users
+        loaded_at_field: last_modified
+        freshness:
+          warn_after: {count: 14, period: day}
+      - name: sessions
+        loaded_at_field: time
+        freshness:
+          warn_after: {count: 14, period: day}
+      - name: pageviews
+        loaded_at_field: time
+        freshness:
+          warn_after: {count: 14, period: day}
+      - name: all_events
+        loaded_at_field: time
+        freshness:
+          warn_after: {count: 14, period: day}
+      - name: sync_info
+        identifier: _sync_info
+        loaded_at_field: sync_ended
+        freshness:
+          warn_after: {count: 14, period: day}
+      - name: user_migrations
+
