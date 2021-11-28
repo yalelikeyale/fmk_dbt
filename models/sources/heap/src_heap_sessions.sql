@@ -13,7 +13,7 @@ SELECT
   , s.ip as heap_session_ip
   , s.referrer as heap_session_referrer
   , s.landing_page as heap_session_lp
-  , s.landing_page_query as heap_session_lp_query
+  , s.landing_page_query as heap_session_lp_query 
   , s.browser as heap_session_browser
   , s.search_keyword as heap_session_search_keyword
   , s.utm_source as heap_session_utm_source
@@ -24,8 +24,10 @@ SELECT
   , s.carrier as heap_session_carrier
   , s.app_name as heap_session_app_name
   , s.app_version as heap_session_app_version
-  , s.heap_device_id
-  , s.heap_app_name
-  , s.heap_device
+  , s.heap_device_id 
+  , s.heap_app_name 
+  , s.heap_device 
 
-FROM {{ source('heap','sessions') }} s
+FROM {{ source('heap','sessions') }} s 
+
+

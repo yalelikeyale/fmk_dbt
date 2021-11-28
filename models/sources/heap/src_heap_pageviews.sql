@@ -30,5 +30,5 @@ SELECT
   , p.path as heap_page_path
   , p.hash as heap_page_hash
   , p.title as heap_page_title
-
-FROM {{ source('heap','pageviews')}} p
+  
+FROM {{ source('heap','pageviews')}} p 

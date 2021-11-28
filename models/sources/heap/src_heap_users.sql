@@ -1,5 +1,6 @@
+
 SELECT
-    u.identity as fmk_identity
+    u.identity as fmk_identity 
   , u.user_id as heap_user_id
   , u.email as heap_user_email
   , u.first_name as heap_user_first
@@ -7,4 +8,4 @@ SELECT
   , u.joindate as heap_first_detected
   , u.last_modified as heap_last_updated
 
-FROM {{ source('heap','users') }} u
+FROM {{ source('heap','users') }} u 
